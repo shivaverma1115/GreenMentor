@@ -4,14 +4,14 @@ const { connection } = require('./config/db');
 const app = express();
 app.use(express.json()) ;
 
-app.get('/', (req, res) => {
-    return res.send({
-        msg: "This is api base point"
-    })
-})
+const { baseRoute } = require('./routes/baseUrl.route');
+app.use('/', baseRoute);
 
 const { signupRouter } = require('./routes/signup.routes');
 app.use('/signup', signupRouter);
+
+const { loginRoute } = require('./routes/login.route');
+app.use('/login', loginRoute);
 
 app.listen(8080, async () => {
     try {
