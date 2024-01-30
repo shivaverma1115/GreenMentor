@@ -9,8 +9,8 @@ const { signupModel } = require('../models/signup.model');
 // ===================== CRUD OPERATION =======================
 // ------------------------ READ --------------------------
 
-signupRouter.get('/:email', async (req, res) => {
-    const users = await signupModel.findOne({ email: req.params.email }) ;
+signupRouter.get('/:_email', async (req, res) => {
+    const users = await signupModel.findOne({ email: req.params._email }) ;
     return res.status(200).send(users)
 })
 
@@ -26,7 +26,7 @@ signupRouter.post("/", async (req, res) => {
     }
     bcrypt.hash(password, 3, async (err, hash) => {
         if (err) {
-            return res.send({
+            return res.status(500).send({
                 msg: 'Something got wrong'
             })
         }
@@ -60,11 +60,11 @@ signupRouter.put('/:_id', async (req, res) => {
 signupRouter.delete('/:_id', async (req, res) => {
     const user = await signupModel.findOneAndDelete({ _id: req.params._id })
     if (user) {
-        return res.send({
+        return res.status(200).send({
             msg: "Delete Successfully"
         })
     }
-    return res.send({
+    return res.status(404).send({
         msg: "Please try again later"
     });
 })

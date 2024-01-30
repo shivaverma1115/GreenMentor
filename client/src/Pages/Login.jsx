@@ -1,4 +1,4 @@
-import {Link, Box, Button, Checkbox, Flex, FormControl, FormLabel, Heading, Input, Stack, Text } from '@chakra-ui/react'
+import {Link, Box, Button, Checkbox, Flex, FormControl, FormLabel, Heading, Input, Stack, Text, useToast } from '@chakra-ui/react'
 import React, { useContext, useState } from 'react'
 import { authContext } from '../ContextProvider/ContextProvider';
 import { useNavigate } from 'react-router-dom';
@@ -10,7 +10,7 @@ const Login = () => {
   }
 
   const nevigate = useNavigate();
-
+  const toast = useToast() ;
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
@@ -20,6 +20,12 @@ const Login = () => {
           "Content-Type": "application/json"
         },
         body: JSON.stringify(LoginData)
+      })
+      toast({
+        title: 'Login successfully.',
+        status: 'success',
+        duration: 5000,
+        isClosable: true,
       })
       const ans = await res.json();
       setToken(ans.token)

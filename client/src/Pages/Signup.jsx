@@ -1,4 +1,4 @@
-import { Box, Button, Flex, FormControl, FormLabel, HStack, Heading, Input, InputGroup, InputRightElement, Link, Stack, Text, useColorModeValue } from '@chakra-ui/react'
+import { Box, Button, Flex, FormControl, FormLabel, HStack, Heading, Input, InputGroup, InputRightElement, Link, Stack, Text, useColorModeValue, useToast } from '@chakra-ui/react'
 import React, { useState } from 'react'
 import { ViewIcon, ViewOffIcon } from '@chakra-ui/icons'
 import axios from 'axios' ;
@@ -11,7 +11,7 @@ const Signup = () => {
     }
 
     const nevigate = useNavigate() ;
-
+    const toast = useToast() ;
     const handleSubmit = async(e)=>{
         e.preventDefault() ;
         const res = await fetch(`${process.env.REACT_APP_BACKENED_URL}/signup`, {
@@ -21,6 +21,12 @@ const Signup = () => {
             },
             body: JSON.stringify(formData)
         })
+        toast({
+            title: 'Account successfully created.',
+            status: 'success',
+            duration: 5000,
+            isClosable: true,
+          })
         const ans = await res.json();
         console.log(ans);
         nevigate('/login')
