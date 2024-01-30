@@ -12,16 +12,13 @@ import {
   useColorModeValue,
   Link,
 } from '@chakra-ui/react'
+import {EditIcon} from "@chakra-ui/icons"
 import { authContext } from '../ContextProvider/ContextProvider';
 import { useNavigate } from 'react-router-dom';
 
 const Dashboard = () => {
-  const { LoginData } = useContext(authContext);
-  const [user, setUser] = useState({
-    name: 'Shiva Verma',
-    age: 26,
-    email: 'shivaverma1115@gmail.com'
-  });
+  const { LoginData ,user, setUser} = useContext(authContext);
+  
   const { name, age, email } = user
   const fetchData = async () => {
     try {
@@ -34,7 +31,7 @@ const Dashboard = () => {
   }
   useEffect(() => {
     fetchData();
-  }, [])
+  }, [user])
 
   const nevigate = useNavigate();
   return (
@@ -45,6 +42,9 @@ const Dashboard = () => {
         boxShadow={'2xl'}
         rounded={'md'}
         overflow={'hidden'}>
+          <Box onClick={()=>nevigate('/editPage')} position={'absolute'}color={'white'}fontSize={'20px'}px={3} >
+            <EditIcon/>
+          </Box>
         <Image
           h={'120px'}
           w={'full'}
@@ -68,11 +68,13 @@ const Dashboard = () => {
         <Box p={6}>
           <Stack spacing={3} align={'center'} mb={5}>
             <Heading fontSize={'2xl'} fontWeight={500} fontFamily={'body'}>
-              {name} - ({age})
+             Name: <span style={{color:'gray'}} >{name}</span> 
+             <br/>
+             Age: <span style={{color:'gray'}} >{age}</span>
             </Heading>
-            <Text color={'gray.500'}>{email}</Text>
+            <Text>Email: <span style={{color:'gray'}} >{email}</span></Text>
             <Text align={'center'}>
-              Back to login?
+              Back to
               <Flex>
                 <Link onClick={() => nevigate('/')} color={'blue.400'}>Signup</Link> 
                 <span style={{marginLeft:'10px',marginRight:'10px'}} >or</span>

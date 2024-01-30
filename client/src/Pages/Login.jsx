@@ -89,7 +89,7 @@ const Login = () => {
                 </> :
                 <Stack pt={6}>
                   <Text align={'center'} onClick={() => nevigate('/')} >
-                    Already a user? <Link color={'blue.400'}>Signup</Link>
+                    Register? <Link color={'blue.400'}>Signup</Link>
                   </Text>
                 </Stack>
             }
