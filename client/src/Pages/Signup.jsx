@@ -10,6 +10,8 @@ const Signup = () => {
         setFormData({ ...formData, [e.target.name]: e.target.value })
     }
 
+    const nevigate = useNavigate() ;
+
     const handleSubmit = async(e)=>{
         e.preventDefault() ;
         const res = await fetch(`${process.env.REACT_APP_BACKENED_URL}/signup`, {
@@ -21,8 +23,8 @@ const Signup = () => {
         })
         const ans = await res.json();
         console.log(ans);
+        nevigate('/login')
     }
-    const nevigate = useNavigate() ;
     return (
         <Flex
             minH={'100vh'}

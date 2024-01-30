@@ -10,25 +10,33 @@ import {
   Stack,
   Button,
   useColorModeValue,
+  Link,
 } from '@chakra-ui/react'
 import { authContext } from '../ContextProvider/ContextProvider';
+import { useNavigate } from 'react-router-dom';
 
 const Dashboard = () => {
   const { LoginData } = useContext(authContext);
   const [user, setUser] = useState({
-    name:'Shiva Verma',
-    age:26,
-    email:'shivaverma1115@gmail.com'
+    name: 'Shiva Verma',
+    age: 26,
+    email: 'shivaverma1115@gmail.com'
   });
-  const {name,age,email} = user
+  const { name, age, email } = user
   const fetchData = async () => {
-    fetch(`${process.env.REACT_APP_BACKENED_URL}/signup/${LoginData.email}`)
-      .then(res => res.json())
-      .then((ans) => setUser(ans))
+    try {
+      fetch(`${process.env.REACT_APP_BACKENED_URL}/signup/${LoginData.email}`)
+        .then(res => res.json())
+        .then((ans) => setUser(ans))
+    } catch (error) {
+      console.log(error);
+    }
   }
   useEffect(() => {
     fetchData();
   }, [])
+
+  const nevigate = useNavigate() ;
   return (
     <Center py={6} minH={'100vh'} >
       <Box
@@ -58,11 +66,14 @@ const Dashboard = () => {
         </Flex>
 
         <Box p={6}>
-          <Stack spacing={0} align={'center'} mb={5}>
+          <Stack spacing={3} align={'center'} mb={5}>
             <Heading fontSize={'2xl'} fontWeight={500} fontFamily={'body'}>
               {name} - ({age})
             </Heading>
             <Text color={'gray.500'}>{email}</Text>
+            <Text align={'center'} onClick={() => nevigate('/login')} >
+              Already a user? <Link color={'blue.400'}>Login</Link>
+            </Text>
           </Stack>
         </Box>
       </Box>
