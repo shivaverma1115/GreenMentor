@@ -1,7 +1,5 @@
 import { Box, Button, Flex, FormControl, FormLabel, HStack, Heading, Input, InputGroup, InputRightElement, Link, Spinner, Stack, Text, useColorModeValue, useToast } from '@chakra-ui/react'
 import React, { useState } from 'react'
-import { ViewIcon, ViewOffIcon } from '@chakra-ui/icons'
-import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
 const Signup = () => {
@@ -18,21 +16,22 @@ const Signup = () => {
     const handleSubmit = async (e) => {
         setLoading(true);
         e.preventDefault();
-        const res = await fetch(`${process.env.REACT_APP_BACKENED_URL}/signup`, {
+        await fetch(`${process.env.REACT_APP_BACKENED_URL}/signup`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
             },
             body: JSON.stringify(formData)
         })
+        .then((res)=>res.json()) 
+        .then((ans)=>console.log(ans))
+        .catch((err)=>console.log(err))
         toast({
             title: 'Account successfully created.',
             status: 'success',
             duration: 5000,
             isClosable: true,
         })
-        const ans = await res.json();
-        console.log(ans);
         nevigate('/login')
         setLoading(false);
     }

@@ -12,7 +12,7 @@ import {
   useColorModeValue,
   Link,
 } from '@chakra-ui/react'
-import {EditIcon} from "@chakra-ui/icons"
+import {DeleteIcon, EditIcon} from "@chakra-ui/icons"
 import { authContext } from '../ContextProvider/ContextProvider';
 import { useNavigate } from 'react-router-dom';
 
@@ -42,7 +42,7 @@ const Dashboard = () => {
         boxShadow={'2xl'}
         rounded={'md'}
         overflow={'hidden'}>
-          <Box onClick={()=>nevigate('/editPage')} position={'absolute'}color={'white'}fontSize={'20px'}px={3} >
+          <Box cursor={'pointer'} onClick={()=>nevigate('/editPage')} position={'absolute'}color={'white'}fontSize={'20px'}px={3} >
             <EditIcon/>
           </Box>
         <Image
@@ -67,7 +67,7 @@ const Dashboard = () => {
 
         <Box p={6}>
           <Stack spacing={3} align={'center'} mb={5}>
-            <Heading fontSize={'2xl'} fontWeight={500} fontFamily={'body'}>
+            <Heading fontSize={'xl'} fontWeight={500} fontFamily={'body'}>
              Name: <span style={{color:'gray'}} >{name}</span> 
              <br/>
              Age: <span style={{color:'gray'}} >{age}</span>

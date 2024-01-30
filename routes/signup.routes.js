@@ -21,7 +21,8 @@ signupRouter.post("/", async (req, res) => {
     const isUser = await signupModel.findOne({ email: email })
     if (isUser) {
         return res.send({
-            msg: "Email already registered, Try Login?"
+            msg: "Email already registered, Try Login?",
+            payload:false 
         })
     }
     bcrypt.hash(password, 3, async (err, hash) => {
@@ -38,7 +39,8 @@ signupRouter.post("/", async (req, res) => {
         })
         await newUser.save();
         return res.status(201).send({
-            msg: "Sign up successfull"
+            msg: "Sign up successfull",
+            payload:true
         })
     })
 })
@@ -46,44 +48,21 @@ signupRouter.post("/", async (req, res) => {
 
 // ------------------------ EDIT --------------------------
 
-// signupRouter.put('/:id', async (req, res) => {
-//     try {
-//         const user = await signupModel.findOneAndUpdate({ _id: req.params.id }, req.body, { new: true });
-//         if (user) {
-//             res.send({
-//                 msg: "Updated Successfully",
-//                 user: user
-//             });
-//         } else {
-//             res.status(404).send({ msg: "User not found" });
-//         }
-//     } catch (error) {
-//         console.log(error);
-//     }
-// })
-
 signupRouter.put('/:id', async (req, res) => {
-    const { id } = req.params;
-    const { name,age } = req.body;
     try {
-        const data = await signupModel.findByIdAndUpdate(
-            id,
-            {
-                name,
-                age
-            },
-            { new: true }
-        );
-        if (data) {
-            res.send({ msg: "Data updated successfully", data });
+        const user = await signupModel.findOneAndUpdate({ _id: req.params.id }, req.body, { new: true });
+        if (user) {
+            res.send({
+                msg: "Updated Successfully",
+                user: user
+            });
         } else {
-            res.send({ msg: "Data not found" });
+            res.status(404).send({ msg: "User not found" });
         }
-    } catch (err) {
-        console.log(err);
-        res.send({ msg: "Something went wrong" });
+    } catch (error) {
+        console.log(error);
     }
-});
+})
 
 // ------------------------ DELETE --------------------------
 
