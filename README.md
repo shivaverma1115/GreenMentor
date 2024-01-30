@@ -8,6 +8,7 @@ A web application for individual user accounts with real-time profile updates an
 <h2>Individual Access</h2>: Each user edits and sees only their own information.
 <h2>Secure Storage</h2>: Robust password hashing and data encryption for privacy.
 <h2>Full Responsive</h2>: This web page is full responsive for all screens.
+<img src='https://res.cloudinary.com/dbbuqesjg/image/upload/v1706637183/Innovatrix-Infotech/Screenshot_36_kit1vo.png' />
 <img src='https://res.cloudinary.com/dbbuqesjg/image/upload/v1706637097/Innovatrix-Infotech/Screenshot_35_tq9zaj.png' />
 
 ## Technologies:
