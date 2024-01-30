@@ -1,18 +1,24 @@
-import {Link, Box, Button, Checkbox, Flex, FormControl, FormLabel, Heading, Input, Stack, Text, useToast } from '@chakra-ui/react'
+import { Link, Box, Button, Checkbox, Flex, FormControl, FormLabel, Heading, Input, Stack, Text, useToast, Spinner } from '@chakra-ui/react'
 import React, { useContext, useState } from 'react'
 import { authContext } from '../ContextProvider/ContextProvider';
 import { useNavigate } from 'react-router-dom';
 
 const Login = () => {
-  const { setToken,LoginData, setLoginData } = useContext(authContext);
+
+  // --------------- handle Loading ----------------
+  const [Loading, setLoading] = useState(false);
+
+
+  const { setToken, LoginData, setLoginData } = useContext(authContext);
   const handleForm = (e) => {
     setLoginData({ ...LoginData, [e.target.name]: e.target.value })
   }
 
   const nevigate = useNavigate();
-  const toast = useToast() ;
+  const toast = useToast();
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true);
     try {
       const res = await fetch(`${process.env.REACT_APP_BACKENED_URL}/login`, {
         method: "POST",
@@ -32,6 +38,7 @@ const Login = () => {
       console.log(LoginData)
       console.log(ans)
       nevigate('/dashboard')
+      setLoading(false);
     } catch (error) {
       console.log(error);
     }
@@ -63,16 +70,27 @@ const Login = () => {
                   <FormLabel>Password</FormLabel>
                   <Input type='password' required border={'1px solid gray'} name='password' onChange={(e) => handleForm(e)} />
                 </Box>
-                <Box mx={'auto'} w={'fit-content'} border={'1px solid gray'} >
-                  <Input type='submit' value={'Signup'} />
-                </Box>
+                {Loading ? "" : <Box mx={'auto'} w={'fit-content'} border={'1px solid gray'} >
+                  <Input type='submit' value={'Login'} />
+                </Box>}
               </Stack>
             </form>
-            <Stack pt={6}>
-              <Text align={'center'} onClick={() => nevigate('/')} >
-                Register? <Link color={'blue.400'}>Signup</Link>
-              </Text>
-            </Stack>
+            {
+              Loading ?
+                <>
+                  <Box w={'fit-content'} m={'auto'}>
+                    <Spinner size='lg' />
+                  </Box>
+                  <Text color={'gray'} fontWeight={700} w={'fit-content'} m={'auto'}>
+                    Data retrieval is in progress. You can expect the results within approximately one minute.
+                  </Text>
+                </> :
+                <Stack pt={6}>
+                  <Text align={'center'} onClick={() => nevigate('/')} >
+                    Already a user? <Link color={'blue.400'}>Signup</Link>
+                  </Text>
+                </Stack>
+            }
           </Stack>
         </Box>
       </Stack>
