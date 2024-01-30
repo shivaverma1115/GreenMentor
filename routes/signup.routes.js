@@ -7,6 +7,14 @@ const signupRouter = express.Router();
 const { signupModel } = require('../models/signup.model');
 
 // ===================== CRUD OPERATION =======================
+// ------------------------ READ --------------------------
+
+signupRouter.get('/:email', async (req, res) => {
+    const users = await signupModel.findOne({ email: req.params.email }) ;
+    return res.status(200).send(users)
+})
+
+
 // ------------------------ CREATE --------------------------
 signupRouter.post("/", async (req, res) => {
     const { name, age, email, password } = req.body;
@@ -33,30 +41,6 @@ signupRouter.post("/", async (req, res) => {
             msg: "Sign up successfull"
         })
     })
-})
-
-// ------------------------ READ --------------------------
-
-signupRouter.get('/', async (req, res) => {
-    const { name, email, sort, order,limit } = req.query;
-
-    let query = {};
-    if (name) {
-        query.name = { $regex: name, $options: "i" };
-    }
-    if (email) {
-        query.email = { $regex: email, $options: "i" };
-    }
-
-    let sortOption = {};
-    if (sort) {
-        if (order === "asc" || order === "desc") {
-            sortOption[sort] = order === "asc" ? 1 : -1;
-        }
-    }
-
-    const users = await signupModel.find(query).limit(limit).sort(sortOption);
-    return res.status(200).send(users)
 })
 
 

@@ -4,9 +4,7 @@ import { authContext } from '../ContextProvider/ContextProvider';
 import { useNavigate } from 'react-router-dom';
 
 const Login = () => {
-  const { setToken } = useContext(authContext);
-
-  const [LoginData, setLoginData] = useState();
+  const { setToken,LoginData, setLoginData } = useContext(authContext);
   const handleForm = (e) => {
     setLoginData({ ...LoginData, [e.target.name]: e.target.value })
   }
