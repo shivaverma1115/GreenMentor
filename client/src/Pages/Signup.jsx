@@ -2,6 +2,7 @@ import { Box, Button, Flex, FormControl, FormLabel, HStack, Heading, Input, Inpu
 import React, { useState } from 'react'
 import { ViewIcon, ViewOffIcon } from '@chakra-ui/icons'
 import axios from 'axios' ;
+import { useNavigate } from 'react-router-dom';
 
 const Signup = () => {
     const [formData, setFormData] = useState();
@@ -21,6 +22,7 @@ const Signup = () => {
         const ans = await res.json();
         console.log(ans);
     }
+    const nevigate = useNavigate() ;
     return (
         <Flex
             minH={'100vh'}
@@ -67,7 +69,7 @@ const Signup = () => {
                             </Stack>
                         </form>
                         <Stack pt={6}>
-                            <Text align={'center'}>
+                            <Text align={'center'} onClick={()=>nevigate('/login')} >
                                 Already a user? <Link color={'blue.400'}>Login</Link>
                             </Text>
                         </Stack>

@@ -1,11 +1,11 @@
 import { Box } from "@chakra-ui/react";
-import Signup from "./Pages/Signup";
+import AllRoutes from "./Components/AllRoutes";
 
 
 function App() {
   return (
     <Box bg={'white'}color={'black'} >
-      <Signup />
+      <AllRoutes />
     </Box>
   );
 }
