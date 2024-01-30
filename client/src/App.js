@@ -1,10 +1,12 @@
+import { Box } from "@chakra-ui/react";
+import Signup from "./Pages/Signup";
 
 
 function App() {
   return (
-    <div>
-      
-    </div>
+    <Box bg={'white'}color={'black'} >
+      <Signup />
+    </Box>
   );
 }
 
