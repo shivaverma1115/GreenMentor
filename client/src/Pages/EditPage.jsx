@@ -8,7 +8,7 @@ const EditPage = () => {
     // --------------- handle Loading ----------------
     const [Loading, setLoading] = useState(false);
 
-    // --------------- User DashBoard Data -----------
+    // --------------- User DashBoard Data through contextApi -----------
     const { user, setUser } = useContext(authContext);
     const handleForm = (e) => {
         setUser({ ...user, [e.target.name]: e.target.value })
@@ -16,6 +16,8 @@ const EditPage = () => {
 
     const nevigate = useNavigate();
     const toast = useToast();
+
+    // --------------- Edit Data to server ----------------
     const handleSubmit = async (e) => {
         e.preventDefault();
         axios.put(`${process.env.REACT_APP_BACKENED_URL}/signup/${user._id}`, user)
@@ -28,7 +30,7 @@ const EditPage = () => {
                     isClosable: true,
                 })
             })
-            .then(()=>{nevigate('/dashboard')})
+            .then(() => { nevigate('/dashboard') })
             .catch((err) => { console.log(err) })
     }
     return (

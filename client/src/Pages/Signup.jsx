@@ -6,13 +6,18 @@ const Signup = () => {
     // --------------- handle Loading ----------------
     const [Loading, setLoading] = useState(false);
 
+    // --------------- handle FormData ----------------
     const [formData, setFormData] = useState();
     const handleForm = (e) => {
         setFormData({ ...formData, [e.target.name]: e.target.value })
     }
 
+    // --------------- for nevigation ----------------
     const nevigate = useNavigate();
+
     const toast = useToast();
+
+    // --------------- Post Data to MongoDb ----------------
     const handleSubmit = async (e) => {
         setLoading(true);
         e.preventDefault();
@@ -23,9 +28,9 @@ const Signup = () => {
             },
             body: JSON.stringify(formData)
         })
-        .then((res)=>res.json()) 
-        .then((ans)=>console.log(ans))
-        .catch((err)=>console.log(err))
+            .then((res) => res.json())
+            .then((ans) => console.log(ans))
+            .catch((err) => console.log(err))
         toast({
             title: 'Account successfully created.',
             status: 'success',

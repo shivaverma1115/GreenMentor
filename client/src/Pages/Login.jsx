@@ -5,17 +5,21 @@ import { useNavigate } from 'react-router-dom';
 
 const Login = () => {
 
+  // --------------- Retrive Data through contextApi ----------------
+  const { setToken, LoginData, setLoginData } = useContext(authContext);
+
+
   // --------------- handle Loading ----------------
   const [Loading, setLoading] = useState(false);
-
-
-  const { setToken, LoginData, setLoginData } = useContext(authContext);
   const handleForm = (e) => {
     setLoginData({ ...LoginData, [e.target.name]: e.target.value })
   }
 
+
   const nevigate = useNavigate();
   const toast = useToast();
+
+  // --------------- Data Post to MongoDb ----------------
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
@@ -70,7 +74,7 @@ const Login = () => {
                   <FormLabel>Password</FormLabel>
                   <Input type='password' required border={'1px solid gray'} name='password' onChange={(e) => handleForm(e)} />
                 </Box>
-                {Loading ? "" : <Box  bg={'blue.400'} borderRadius={5}color={'white'}_hover={{
+                {Loading ? "" : <Box bg={'blue.400'} borderRadius={5} color={'white'} _hover={{
                   bg: 'blue.500',
                 }} >
                   <Input cursor={'pointer'} type='submit' value={'Login'} />

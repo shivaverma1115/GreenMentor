@@ -1,25 +1,15 @@
 import React, { useContext, useEffect, useState } from 'react'
-import {
-  Heading,
-  Avatar,
-  Box,
-  Center,
-  Image,
-  Flex,
-  Text,
-  Stack,
-  Button,
-  useColorModeValue,
-  Link,
-} from '@chakra-ui/react'
-import {DeleteIcon, EditIcon} from "@chakra-ui/icons"
+import { Heading, Avatar, Box, Center, Image, Flex, Text, Stack, Link } from '@chakra-ui/react'
+import { EditIcon } from "@chakra-ui/icons"
 import { authContext } from '../ContextProvider/ContextProvider';
 import { useNavigate } from 'react-router-dom';
 
 const Dashboard = () => {
-  const { LoginData ,user, setUser} = useContext(authContext);
-  
-  const { name, age, email } = user
+  // --------------- Data mange through contextApi ----------------
+  const { LoginData, user, setUser } = useContext(authContext);
+  const { name, age, email } = user;
+
+  // --------------- Retrive Data through mongoDb ----------------
   const fetchData = async () => {
     try {
       fetch(`${process.env.REACT_APP_BACKENED_URL}/signup/${LoginData.email}`)
@@ -33,7 +23,9 @@ const Dashboard = () => {
     fetchData();
   }, [user])
 
+  // --------------- For Nevigation ----------------
   const nevigate = useNavigate();
+
   return (
     <Center py={6} minH={'100vh'} >
       <Box
@@ -42,9 +34,9 @@ const Dashboard = () => {
         boxShadow={'2xl'}
         rounded={'md'}
         overflow={'hidden'}>
-          <Box cursor={'pointer'} onClick={()=>nevigate('/editPage')} position={'absolute'}color={'white'}fontSize={'20px'}px={3} >
-            <EditIcon/>
-          </Box>
+        <Box cursor={'pointer'} onClick={() => nevigate('/editPage')} position={'absolute'} color={'white'} fontSize={'20px'} px={3} >
+          <EditIcon />
+        </Box>
         <Image
           h={'120px'}
           w={'full'}
@@ -67,17 +59,17 @@ const Dashboard = () => {
 
         <Box p={6}>
           <Stack spacing={3} align={'center'} mb={5}>
-            <Heading fontSize={'xl'} fontWeight={500} fontFamily={'body'}>
-             Name: <span style={{color:'gray'}} >{name}</span> 
-             <br/>
-             Age: <span style={{color:'gray'}} >{age}</span>
+            <Heading fontSize={'17px'} fontWeight={500} fontFamily={'body'}>
+              Name: <span style={{ color: 'gray' }} >{name}</span>
+              <br />
+              Age: <span style={{ color: 'gray' }} >{age}</span>
             </Heading>
-            <Text>Email: <span style={{color:'gray'}} >{email}</span></Text>
+            <Text>Email: <span style={{ color: 'gray' }} >{email}</span></Text>
             <Text align={'center'}>
               Back to
               <Flex>
-                <Link onClick={() => nevigate('/')} color={'blue.400'}>Signup</Link> 
-                <span style={{marginLeft:'10px',marginRight:'10px'}} >or</span>
+                <Link onClick={() => nevigate('/')} color={'blue.400'}>Signup</Link>
+                <span style={{ marginLeft: '10px', marginRight: '10px' }} >or</span>
                 <Link onClick={() => nevigate('/login')} color={'blue.400'}>Login</Link>
               </Flex>
             </Text>
