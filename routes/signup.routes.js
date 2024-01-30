@@ -37,7 +37,7 @@ signupRouter.post("/", async (req, res) => {
 
 // ------------------------ READ --------------------------
 
-signupRouter.get('/', async (req, res) => {
+signupRouter.get('/:_adminId', async (req, res) => {
     const { name, email, sort, order,limit } = req.query;
 
     let query = {};

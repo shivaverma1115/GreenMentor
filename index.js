@@ -7,14 +7,14 @@ app.use(express.json()) ;
 const { baseRoute } = require('./routes/baseUrl.route');
 app.use('/', baseRoute);
 
-const {authentication} = require('./middleware/authentication.middleware') ;
-app.use(authentication)
-
 const { signupRouter } = require('./routes/signup.routes');
 app.use('/signup', signupRouter);
 
 const { loginRoute } = require('./routes/login.route');
 app.use('/login', loginRoute);
+
+const {authentication} = require('./middleware/authentication.middleware') ;
+app.use(authentication)
 
 const port = process.env.PORT ;
 app.listen(port, async () => {
