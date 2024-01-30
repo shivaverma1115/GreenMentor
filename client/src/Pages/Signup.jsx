@@ -16,7 +16,7 @@ const Signup = () => {
     const nevigate = useNavigate();
     const toast = useToast();
     const handleSubmit = async (e) => {
-        setLoading(true) ;
+        setLoading(true);
         e.preventDefault();
         const res = await fetch(`${process.env.REACT_APP_BACKENED_URL}/signup`, {
             method: "POST",
@@ -34,7 +34,7 @@ const Signup = () => {
         const ans = await res.json();
         console.log(ans);
         nevigate('/login')
-        setLoading(false) ;
+        setLoading(false);
     }
     return (
         <Flex
@@ -76,8 +76,10 @@ const Signup = () => {
                                     <FormLabel>Password</FormLabel>
                                     <Input type='password' required border={'1px solid gray'} name='password' onChange={(e) => handleForm(e)} />
                                 </Box>
-                                {Loading ? "" : <Box mx={'auto'} w={'fit-content'} border={'1px solid gray'} >
-                                    <Input type='submit' value={'Signup'} />
+                                {Loading ? "" : <Box bg={'blue.400'} borderRadius={5} color={'white'} _hover={{
+                                    bg: 'blue.500',
+                                }}  >
+                                    <Input cursor={'pointer'} type='submit' value={'Signup'} />
                                 </Box>}
                             </Stack>
                         </form>

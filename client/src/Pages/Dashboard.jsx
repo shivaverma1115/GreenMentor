@@ -36,7 +36,7 @@ const Dashboard = () => {
     fetchData();
   }, [])
 
-  const nevigate = useNavigate() ;
+  const nevigate = useNavigate();
   return (
     <Center py={6} minH={'100vh'} >
       <Box
@@ -71,8 +71,13 @@ const Dashboard = () => {
               {name} - ({age})
             </Heading>
             <Text color={'gray.500'}>{email}</Text>
-            <Text align={'center'} onClick={() => nevigate('/login')} >
-              Already a user? <Link color={'blue.400'}>Login</Link>
+            <Text align={'center'}>
+              Back to login?
+              <Flex>
+                <Link onClick={() => nevigate('/')} color={'blue.400'}>Signup</Link> 
+                <span style={{marginLeft:'10px',marginRight:'10px'}} >or</span>
+                <Link onClick={() => nevigate('/login')} color={'blue.400'}>Login</Link>
+              </Flex>
             </Text>
           </Stack>
         </Box>

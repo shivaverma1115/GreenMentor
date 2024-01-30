@@ -52,7 +52,7 @@ const Login = () => {
         <Stack align={'center'}>
           <Heading fontSize={'4xl'}>Login to your account</Heading>
           <Text fontSize={'lg'} color={'gray.600'}>
-            to enjoy all of our cool <Text color={'blue.400'}>features</Text> ✌️
+            to enjoy all of our cool <span color={'blue.400'}>features</span> ✌️
           </Text>
         </Stack>
         <Box
@@ -70,8 +70,10 @@ const Login = () => {
                   <FormLabel>Password</FormLabel>
                   <Input type='password' required border={'1px solid gray'} name='password' onChange={(e) => handleForm(e)} />
                 </Box>
-                {Loading ? "" : <Box mx={'auto'} w={'fit-content'} border={'1px solid gray'} >
-                  <Input type='submit' value={'Login'} />
+                {Loading ? "" : <Box  bg={'blue.400'} borderRadius={5}color={'white'}_hover={{
+                  bg: 'blue.500',
+                }} >
+                  <Input cursor={'pointer'} type='submit' value={'Login'} />
                 </Box>}
               </Stack>
             </form>
