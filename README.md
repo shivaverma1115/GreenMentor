@@ -1,5 +1,7 @@
 ## Real-Time User Profile Management - Secure and Dynamic
 A web application for individual user accounts with real-time profile updates and secure data management.
+Live at : https://innovatrixinfotech-cmxp90hxk-shivaverma1115.vercel.app/ 
+backened api : https://innovatrix-infotech.onrender.com
 
 ## Features:
 <h2>Signup/Login</h2>: Create and access accounts using email and password.
